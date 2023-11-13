@@ -1,0 +1,101 @@
+<template> 
+  <article class="slds-card">
+         <div class="slds-card__header slds-grid">
+           <header class="slds-media slds-media_center slds-has-flexi-truncate">
+             <div class="slds-media__figure">
+               <span class="slds-icon_container slds-icon-standard-contact" title="contact">
+                 <lightning-icon icon-name="standard:contact" alternative-text="contact" size="medium"></lightning-icon>
+                 <span class="slds-assistive-text">contact</span>
+               </span>
+             </div>
+             <div class="slds-media__body">
+               <h2 class="slds-card__header-title">
+                 <a class="slds-card__header-link slds-truncate" title="Search Contacts">
+                   <span>Search Contacts</span>
+                 </a>
+               </h2>
+             </div>
+             <div class="slds-no-flex">
+          
+               <button class="slds-button slds-button_neutral" onclick={showModalBox} >New Contact</button>
+             </div>
+           </header>
+         </div>
+  
+       <div class="slds-m-around_medium">
+         <!-- Search bar -->
+             <lightning-input 
+                 type="search" 
+                 onchange={handleKeyChange} 
+                 class="slds-m-bottom_small"           
+                 label="Search" 
+                 value={searchKey}>
+             </lightning-input>
+                <!-- Datatable -->
+             <lightning-datatable 
+                 data-id="table" 
+                 key-field="Id" 
+                 data={data} 
+                 columns={columns} 
+                 sorted-by={sortedBy}
+                 sorted-direction={sortedDirection} 
+                 hide-checkbox-column="true"
+                 onsave={updateSelectedRecords}
+                 onsort={sortColumns}>
+            </lightning-datatable>
+            </br>
+         <!-- Pagination Previous and Next -->
+            <lightning-layout horizontal-align="space">
+                 <lightning-layout-item flexibility="auto">
+                     <lightning-button 
+                         label="Previous" 
+                         icon-name="utility:chevronleft" 
+                         onclick={previousHandler}>
+                     </lightning-button>
+                 </lightning-layout-item>
+                 <lightning-layout-item flexibility="auto">
+                     Page {page} of {totalPage}
+                 </lightning-layout-item>
+                 
+                 <lightning-layout-item flexibility="auto">
+                     <lightning-button 
+                         label="Next" 
+                         icon-name="utility:chevronright" 
+                         icon-position="right"
+                         onclick={nextHandler}>
+                     </lightning-button>
+ 
+                 </lightning-layout-item>
+                 </lightning-layout>
+               </div>
+ 
+             <!--Create Contact Record -->
+           <template if:true={isShowModal}>
+                  <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+                 aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                     <!-- modal header start -->
+              <lightning-layout>
+                         <!-- Displaying Contact fields to get information. -->
+                                      <lightning-card title="Create Contact Record" icon-name="standard:contact">
+                                       <div class="slds-p-around_x-small">
+                                         <lightning-input class="slds-p-around_medium" label="FirstName" name="ContactName"
+                                         onchange={nameChangedHandler}></lightning-input>
+                                         <lightning-input class="slds-p-around_medium" label="LastName" name="ContactName"
+                                         onchange={lastnameChangedHandler}></lightning-input>
+                                      <lightning-input class="slds-p-around_medium" label="Contact Email" name="ContactEmail"
+                                         onchange={emailChangedHandler}></lightning-input>
+                                     <lightning-input class="slds-p-around_medium" label="Phone" type="phone" name="ContactPhone"
+                                         onchange={phoneChangedHandler}></lightning-input>
+                                  
+                                     <button type="button" class="slds-button slds-button_brand slds-float_right" onclick={createContactRecord}>Create Contact</button>
+                                    <button type="button" class="slds-button slds-button_brand" onclick={hideModalBox}>Cancel</button>
+                                         </div>
+                                       </lightning-card>
+                                       </lightning-layout>    
+                                     </div>
+                                    </section>
+                           </template>
+ 
+         </article>
+         </template>
