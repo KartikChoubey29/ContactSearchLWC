@@ -31,7 +31,7 @@
     <types>
         <members>getContacts</members>
         <name>ApexClass</name>
-    </types>
+    </types> 
    <!-- <types>
         <members>*</members>
         <name>StaticResource</name>
