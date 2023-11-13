@@ -27,7 +27,7 @@
     <types>
         <members>contactList</members>
         <name>LightningComponentBundle</name>
-    </types>
+    </types> 
     <types>
         <members>getContacts</members>
         <name>ApexClass</name>
